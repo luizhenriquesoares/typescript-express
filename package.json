@@ -1,0 +1,31 @@
+{
+  "name": "desafio-node-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "@luizhenriquesoares",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "nodemon"
+  },
+  "dependencies": {
+    "@types/supertest": "^2.0.7",
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.2",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "passport": "^0.4.0",
+    "prettier": "^1.16.0",
+    "supertest": "^3.4.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.0",
+    "@types/passport": "^1.0.0",
+    "tsconfig-paths": "^3.7.0"
+  }
+}
