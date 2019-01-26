@@ -24,7 +24,7 @@ const app = express();
 /* bootstrap ---------------------------------------------------------------- */
 module.exports = app;
 
-const connect = () => {
+const connect = (): Promise<void> => {
     (mongoose as any).Promise = bluebird;
     return mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true }).then(
         () => {console.log('MongoDB Connection UP'); },
@@ -33,11 +33,11 @@ const connect = () => {
       });
 };
 
-const listen = () => {
+const listen = (connect: any): void => {
     app.listen(port, () => {
+        typeof connect === 'function' ? connect() : null;
         console.log('%s Express server listening on port %d in %s mode.', chalk.default.bgGreen('✓'), port, app.get('env'));
     });
 };
 
-connect();
-listen();
+listen(connect);
