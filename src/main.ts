@@ -11,13 +11,6 @@ import * as bluebird from 'bluebird';
 dotenv.load({ path: '.env' });
 const port: string = process.env.PORT;
 
-/* Models init -------------------------------------------------------------- */
-const models = path.join(__dirname, 'models');
-
-fs.readdirSync(models)
-  .filter(file => file.search(/^[^\.].*\.js$/))
-  .forEach(file => require(path.join(models, file)));
-
 /* app config --------------------------------------------------------------- */
 const app = express();
 
