@@ -1,8 +1,6 @@
 /* dependencies-------------------------------------------------------------- */
-import * as fs from 'fs';
 import * as express from 'express';
 import * as dotenv from 'dotenv';
-import * as path from 'path';
 import * as mongoose from 'mongoose';
 import * as chalk from 'chalk';
 import * as bluebird from 'bluebird';
