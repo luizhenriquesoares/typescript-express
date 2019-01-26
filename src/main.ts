@@ -26,18 +26,16 @@ module.exports = app;
 
 const connect = () => {
     (mongoose as any).Promise = bluebird;
-    return mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, {useMongoClient: true}).then(
-        () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
+    return mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true }).then(
+        () => {console.log('MongoDB Connection UP'); },
       ).catch(err => {
-        // tslint:disable-next-line:no-console
         console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
       });
 };
 
 const listen = () => {
     app.listen(port, () => {
-        // tslint:disable-next-line:no-console
-        console.log('%s Express server listening on port %d in %s mode.', chalk.green('✓'), port, app.get('env'));
+        console.log('%s Express server listening on port %d in %s mode.', chalk.default.bgGreen('✓'), port, app.get('env'));
     });
 };
 
