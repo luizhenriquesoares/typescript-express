@@ -1,10 +1,7 @@
 import * as express from 'express';
 import * as passport from 'passport';
+
 const Router = express.Router();
-
-// Import router group
-import './express-group-router';
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,16 +14,14 @@ import './express-group-router';
 */
 
 /* controllers -------------------------------------------------------------- */
-import * as testController from '../controllers/test.controller';
+import * as restaurantController from '../Controllers/RestaurantController';
 /* -------------------------------------------------------------------------- *\
  *  Exposes routes
 \* -------------------------------------------------------------------------- */
 
-module.exports = (app: any, passport: any) => {
-
-    Router.group('/api', (Router: any) => {
-        console.log(Router);
+module.exports = (app: any) => {
         /* Test  ------------------------------------------------- */
-        Router.get('/test', testController.ping);
-    });
+        Router.get('/api/v1/restaurant', restaurantController.ping);
+
+        app.use(Router);
 };

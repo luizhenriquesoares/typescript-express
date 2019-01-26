@@ -12,6 +12,10 @@ const port: string = process.env.PORT;
 /* app config --------------------------------------------------------------- */
 const app = express();
 
+/* app config --------------------------------------------------------------- */
+// tslint:disable-next-line:no-var-requires
+require('./Routes/routes')(app);
+
 /* bootstrap ---------------------------------------------------------------- */
 module.exports = app;
 
