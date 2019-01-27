@@ -8,13 +8,10 @@ import DIContainer from 'src/Insfrastructure/CrossCutting/DI/SimpleInjection';
 
 export default class RestaurantController extends BaseController<Restaurant, RestaurantDto> {
 
-    constructor() {
-        super();
-    }
-
-    public ping(req: Request, res: Response) {
-        const service = DIContainer.resolve<RestaurantService>(RestaurantService);
-        res.status(200).json(service.getRestaurante());
+    async ping(req: Request, res: Response) {
+        const restaurantService = DIContainer.resolve<RestaurantService>(RestaurantService);
+        const result = await restaurantService.findByIdAsync('1');
+        res.status(200).json(result);
     }
 
 }
