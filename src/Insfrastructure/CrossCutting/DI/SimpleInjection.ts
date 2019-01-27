@@ -5,8 +5,12 @@ import { BaseDomain } from 'src/Domains/BaseDomain';
 import { BaseRepository } from '../../Repositories/BaseRepository';
 import { RestaurantRepository } from '../../Repositories/RestaurantRepository';
 import { RestaurantDtoMappingToDomain } from '../Mappings/RestaurantDtoMappingToDomain';
+import { MongoDBContext } from '../../MongoDBContext';
 
 const DIContainer = new Container();
+
+/* DbContext --------------------------------------------------------------- */
+DIContainer.bind<MongoDBContext<BaseDomain>>(MongoDBContext).toSelf();
 
 /* BASE --------------------------------------------------------------- */
 DIContainer.bind<BaseService<BaseDomain>>(BaseService).toSelf();
