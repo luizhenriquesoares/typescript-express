@@ -14,14 +14,14 @@ const Router = express.Router();
 */
 
 /* controllers -------------------------------------------------------------- */
-import * as restaurantController from '../Controllers/RestaurantController';
+import RestaurantController from '../Controllers/RestaurantController';
 /* -------------------------------------------------------------------------- *\
  *  Exposes routes
 \* -------------------------------------------------------------------------- */
 
 module.exports = (app: any) => {
         /* Test  ------------------------------------------------- */
-        Router.get('/api/v1/restaurant', restaurantController.ping);
+        Router.get('/api/v1/restaurant', RestaurantController.prototype.ping);
 
         app.use(Router);
 };
