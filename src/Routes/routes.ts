@@ -21,7 +21,7 @@ import RestaurantController from '../Controllers/RestaurantController';
 
 module.exports = (app: any) => {
         /* Test  ------------------------------------------------- */
-        Router.get('/api/v1/restaurant', RestaurantController.prototype.ping);
+        Router.get('/api/v1/restaurant', RestaurantController.prototype.checkTest);
 
         app.use(Router);
 };

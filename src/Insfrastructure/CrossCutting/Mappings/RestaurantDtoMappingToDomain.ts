@@ -1,8 +1,8 @@
 import 'automapper-ts/dist/automapper';
 import { Mapping } from './Mapping';
-import { Restaurant } from 'src/Domains/Restaurant/Restaurant';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
+import { Restaurant } from '../../../Domains/Restaurant/Restaurant';
 
 @injectable()
 export class RestaurantDtoMappingToDomain extends Mapping<Restaurant> {
