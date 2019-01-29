@@ -6,11 +6,15 @@ import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
 
 export default class RestaurantController {
 
-    private readonly _RESTAURANTESERVICE = SimpleInjector.get<IRestauranteService>(TYPES.IRestauranteService);
+    private _RESTAURANTESERVICE: IRestauranteService;
 
-   public async checkTest(req: Request, res: Response) {
+    constructor(restauranteService = SimpleInjector.get<IRestauranteService>(TYPES.IRestauranteService)) {
+        this._RESTAURANTESERVICE = restauranteService;
+    }
+   public checkTest(req: Request, res: Response) {
         try {
-            const restaurant = await SimpleInjector.get<IRestauranteService>(TYPES.IRestauranteService).getRestaurante();
+            const obj = new RestaurantController();
+            const restaurant = obj._RESTAURANTESERVICE.getRestaurante();
             res.status(200).json(restaurant);
         } catch (error) {
             console.log(error);

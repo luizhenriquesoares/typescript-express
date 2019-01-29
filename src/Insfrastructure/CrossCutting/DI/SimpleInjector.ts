@@ -20,8 +20,8 @@ const SimpleInjector = new Container();
 
 /* Restaurants --------------------------------------------------------------- */
 // SimpleInjector.bind<RestaurantService>(RestaurantService).toSelf();
-SimpleInjector.bind<IRestauranteService>(TYPES.IRestauranteService).to(RestaurantService);
 // DIContainer.bind<RestaurantRepository>(RestaurantRepository).toSelf();
+SimpleInjector.bind<IRestauranteService>(TYPES.IRestauranteService).to(RestaurantService);
 // DIContainer.bind<RestaurantDtoMappingToDomain>(RestaurantDtoMappingToDomain).toSelf();
 
 export { SimpleInjector };

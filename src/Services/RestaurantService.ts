@@ -14,9 +14,9 @@ export class RestaurantService implements IRestauranteService {
     //     super(repository);
     // }
 
-    public async getRestaurante() {
+    public getRestaurante() {
         console.log('RESTAURANT SERVICE');
         // const restaurant = await this.findOneAsync();
-        return resolve('dsds');
+        return 'dd';
     }
 }

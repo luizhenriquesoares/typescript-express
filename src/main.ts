@@ -14,7 +14,7 @@ const app = express();
 
 /* app config --------------------------------------------------------------- */
 // tslint:disable-next-line:no-var-requires
-require('./Routes/routes')(app);
+require('./Routes')(app);
 
 /* bootstrap ---------------------------------------------------------------- */
 module.exports = app;
