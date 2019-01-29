@@ -1,21 +1,22 @@
 
 import { Response, Request } from 'express';
-import { SimpleInjector } from '../Insfrastructure/CrossCutting/DI/SimpleInjector';
-import IRestauranteService from '../Services/Interfaces/IRestauranteService';
+import { inject } from 'inversify';
 import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
+import { interfaces, controller, httpGet } from 'inversify-express-utils';
+import IRestauranteService from '../Services/Interfaces/IRestauranteService';
 
-export default class RestaurantController {
+@controller('/teste')
+export default class RestaurantController implements interfaces.Controller {
 
     private _RESTAURANTESERVICE: IRestauranteService;
 
-    constructor(restauranteService = SimpleInjector.get<IRestauranteService>(TYPES.IRestauranteService)) {
+    constructor(@inject(TYPES.IRestauranteService) private restauranteService: IRestauranteService ) {
         this._RESTAURANTESERVICE = restauranteService;
     }
+    @httpGet('/')
    public checkTest(req: Request, res: Response) {
         try {
-            const obj = new RestaurantController();
-            const restaurant = obj._RESTAURANTESERVICE.getRestaurante();
-            res.status(200).json(restaurant);
+            res.status(200).json(this._RESTAURANTESERVICE.getRestaurante());
         } catch (error) {
             console.log(error);
         }
