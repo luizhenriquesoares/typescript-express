@@ -1,3 +1,3 @@
 export default interface IRestauranteService {
-     getRestaurante(): string;
+     getRestaurante(): Promise<any>;
 }

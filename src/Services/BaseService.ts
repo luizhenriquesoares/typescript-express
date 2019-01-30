@@ -1,40 +1,39 @@
+import { Response, Request } from 'express';
+import { inject } from 'inversify';
 import { BaseDomain } from '../Domains/BaseDomain';
-import { unmanaged, injectable, inject } from 'inversify';
+import { injectable } from 'inversify';
 import { BaseRepository } from '../Insfrastructure/Repositories/BaseRepository';
 import { IBaseRepository } from '../Insfrastructure/Repositories/Interfaces/IBaseRepository';
 import 'reflect-metadata';
+import IBaseService from './Interfaces/IBaseService';
+import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
+import { BaseDto } from '../Domains/BaseDto';
 
 @injectable()
-export class BaseService<TDomain extends BaseDomain, TRepository extends BaseRepository <TDomain>> {
+export class BaseService<TDomain extends BaseDomain> implements IBaseService<TDomain> {
 
     private readonly _REPOSITORY: IBaseRepository<TDomain>;
 
-    constructor(repository: IBaseRepository<TDomain>) {
-        this._REPOSITORY = repository;
+    constructor(@inject(TYPES.IBaseRepository) baseRepository: IBaseRepository<TDomain>) {
+        this._REPOSITORY = baseRepository;
     }
 
-    async findAllAsync(): Promise<TDomain[]> {
-        return await Promise.resolve([]);
+    findAllAsync(): Promise<TDomain> {
+        throw new Error('Method not implemented.');
     }
-
-    async findOneAsync() {
-        console.log('FINDONEASYNC');
+    async findOneAsync(): Promise<TDomain> {
         return await this._REPOSITORY.findOne();
     }
-
-    async findByIdAsync(id: bigint | string) {
-        return 'Method not implemented';
+    findByIdAsync(id: string | bigint): Promise<TDomain> {
+        throw new Error('Method not implemented.');
     }
-
-    async createAsync(obj: TDomain) {
-        return 'Method not implemented';
+    createAsync(obj: TDomain): Promise<TDomain> {
+        throw new Error('Method not implemented.');
     }
-
-    async updateAsync(obj: TDomain) {
-        return 'Method not implemented';
+    updateAsync(obj: TDomain): Promise<TDomain> {
+        throw new Error('Method not implemented.');
     }
-
-    async deleteAsync(id: bigint) {
-        return 'Method not implemented';
+    deleteAsync(id: bigint): Promise<TDomain> {
+        throw new Error('Method not implemented.');
     }
 }
