@@ -2,7 +2,6 @@ import { BaseDomain } from '../../Domains/BaseDomain';
 import { injectable, inject } from 'inversify';
 import 'reflect-metadata';
 import { IBaseRepository } from './Interfaces/IBaseRepository';
-import { MongoDBContext } from '../MongoDBContext';
 import { TYPES } from '../../Insfrastructure/CrossCutting/DI/Types';
 import { IDbContext } from './Interfaces/IDbContext';
 @injectable()

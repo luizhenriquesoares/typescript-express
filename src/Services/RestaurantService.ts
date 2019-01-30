@@ -1,10 +1,10 @@
 import { BaseService } from './BaseService';
 
 import { injectable } from 'inversify';
-import { Restaurant } from '../Domains/Restaurant/Restaurant';
 import { RestaurantRepository } from '../Insfrastructure/Repositories/RestaurantRepository';
 import IRestauranteService from './Interfaces/IRestauranteService';
 import 'reflect-metadata';
+import { Restaurant } from '../Domains/Restaurant/Restaurant';
 
 @injectable()
 export class RestaurantService extends BaseService<Restaurant> implements IRestauranteService {

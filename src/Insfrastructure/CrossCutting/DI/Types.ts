@@ -3,6 +3,7 @@ const TYPES = {
     IBaseService: Symbol.for('IBaseService'),
     IRestauranteService: Symbol.for('IRestauranteService'),
     IDbContext: Symbol.for('IDbContext'),
+    BaseDomain: Symbol.for('BaseDomain'),
 };
 
 export { TYPES };
