@@ -1,5 +1,5 @@
 import { BaseDomain } from '../../Domains/BaseDomain';
-import { injectable, inject } from 'inversify';
+import { injectable, inject, multiInject } from 'inversify';
 import 'reflect-metadata';
 import { IBaseRepository } from './Interfaces/IBaseRepository';
 import { TYPES } from '../../Insfrastructure/CrossCutting/DI/Types';
@@ -16,9 +16,9 @@ export class BaseRepository<TDomain extends BaseDomain> implements IBaseReposito
     find(item: TDomain): Promise<TDomain[]> {
         throw new Error('Method not implemented.');
     }
-    async findOne(): Promise<TDomain> {
+    findOne(){
         console.log('============== Base Repository FindONE ==============');
-        return await this._DBCONTEXT.findOne();
+        return this._DBCONTEXT.findOne();
     }
     create(item: TDomain): Promise<boolean> {
         throw new Error('Method not implemented.');

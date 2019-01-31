@@ -11,9 +11,9 @@ import { RestaurantDto } from 'Domains/Restaurant/RestaurantDto';
 @controller('/teste')
 export default class RestaurantController extends BaseController<Restaurant, RestaurantDto> {
 
-    private _RESTAURANTESERVICE: IRestauranteService;
+    private _RESTAURANTESERVICE: IRestauranteService<Restaurant>;
 
-    constructor(@inject(TYPES.IRestauranteService) restauranteService: IRestauranteService ) {
+    constructor(@inject(TYPES.IRestauranteService) restauranteService: IRestauranteService<Restaurant> ) {
         super();
         this._RESTAURANTESERVICE = restauranteService;
     }

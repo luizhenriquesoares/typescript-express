@@ -1,8 +1,9 @@
-import { SchemaOptions } from 'mongoose';
 import { Typegoose } from 'typegoose';
 import { injectable, decorate } from 'inversify';
+import { SchemaOptions } from 'mongoose';
 
 decorate(injectable(), Typegoose);
+// @injectable()
 export class BaseDomain extends Typegoose  {
     public readonly id: bigint | string;
 }

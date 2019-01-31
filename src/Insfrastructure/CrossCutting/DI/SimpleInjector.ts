@@ -9,6 +9,8 @@ import { IBaseRepository } from '../../../Insfrastructure/Repositories/Interface
 import { IDbContext } from '../../Repositories/Interfaces/IDbContext';
 import { MongoDBContext } from '../../../Insfrastructure/MongoDBContext';
 import { TYPES } from './Types';
+import { Restaurant } from '../../../Domains/Restaurant/Restaurant';
+import { IRestaurante } from 'Domains/Restaurant/Interfaces/IRestaurante';
 const SimpleInjector = new Container();
 
 /* DbContext --------------------------------------------------------------- */
@@ -19,7 +21,8 @@ SimpleInjector.bind<IBaseService<BaseDomain>>(TYPES.IBaseService).to(BaseService
 SimpleInjector.bind<BaseDomain>(TYPES.BaseDomain).to(BaseDomain);
 SimpleInjector.bind<IBaseRepository<BaseDomain>>(TYPES.IBaseRepository).to(BaseRepository);
 
+SimpleInjector.bind<IRestaurante>(TYPES.IRestaurante).to(Restaurant);
 /* Restaurants --------------------------------------------------------------- */
-SimpleInjector.bind<IRestauranteService>(TYPES.IRestauranteService).to(RestaurantService);
+SimpleInjector.bind<IRestauranteService<Restaurant>>(TYPES.IRestauranteService).to(RestaurantService);
 
 export { SimpleInjector };

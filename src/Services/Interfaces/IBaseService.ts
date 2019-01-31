@@ -3,7 +3,7 @@ export default interface IBaseService<TDomain> {
 
      findAllAsync(): Promise<TDomain>;
 
-     findOneAsync(): Promise<TDomain>;
+     findOneAsync();
 
      findByIdAsync(id: bigint | string): Promise<TDomain>;
 

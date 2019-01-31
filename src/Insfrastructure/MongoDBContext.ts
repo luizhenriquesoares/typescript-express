@@ -1,27 +1,28 @@
-import { ModelType } from 'typegoose';
-import { injectable, inject } from 'inversify';
+import { Typegoose } from 'typegoose';
+import { injectable, inject, multiInject } from 'inversify';
 import { BaseDomain } from '../Domains/BaseDomain';
 import { IDbContext } from './Repositories/Interfaces/IDbContext';
-import { TYPES } from './CrossCutting/DI/Types';
 import 'reflect-metadata';
-
+import { BaseService } from '../Services/BaseService';
+import { IBaseRepository } from './Repositories/Interfaces/IBaseRepository';
+import { TYPES } from './CrossCutting/DI/Types';
 @injectable()
-export class MongoDBContext<T extends BaseDomain> implements IDbContext<BaseDomain> {
+export class MongoDBContext<T extends Typegoose> implements IDbContext<BaseDomain> {
 
-    protected _MODEL: BaseDomain;
-    protected  _MONGODBCONTEXT: ModelType<BaseDomain>;
-    // constructor(@inject(TYPES.IRestauranteService) restauranteService: IRestauranteService ) {
-    constructor(@inject(TYPES.BaseDomain) baseDomain: BaseDomain ) {
-        this._MODEL = baseDomain;
-        this._MONGODBCONTEXT = this._MODEL.getModelForClass(this._MODEL);
+    protected _MONGODBCONTEXT;
+    constructor() {
+        this._MONGODBCONTEXT = BaseService.getInstance();
     }
 
     find(item: BaseDomain): Promise<BaseDomain[]> {
         throw new Error('Method not implemented.');
     }
-    async findOne(): Promise<InstanceType<any>> {
+    findOne() {
         console.log('============== MONGO DBContext ==============');
-        return await this._MONGODBCONTEXT.findOne({}).exec();
+        console.log(this._MONGODBCONTEXT);
+        const result = this._MONGODBCONTEXT.findOne().exec();
+
+        return result;
     }
     create(item: BaseDomain): Promise<boolean> {
         throw new Error('Method not implemented.');
