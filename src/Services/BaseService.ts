@@ -6,25 +6,18 @@ import IBaseService from './Interfaces/IBaseService';
 import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
 import 'reflect-metadata';
 import { ModelType, Typegoose } from 'typegoose';
+import { BaseRepository } from '../Insfrastructure/Repositories/BaseRepository';
+import { IDbContext } from '../Insfrastructure/Repositories/Interfaces/IDbContext';
 
 @injectable()
-export class BaseService<T extends Typegoose> implements IBaseService<T> {
+export class BaseService<T extends Typegoose> extends BaseRepository<BaseDomain> implements IBaseService<T> {
 
-    protected readonly _REPOSITORY: IBaseRepository<T>;
+    // protected readonly _REPOSITORY: IBaseRepository<T>;
     protected _MODEL: ModelType<T>;
-    static _INSTANCE;
 
-    constructor(@inject(TYPES.IBaseRepository) baseRepository: IBaseRepository<T>) {
-        this._REPOSITORY = baseRepository;
-        if (!BaseService._INSTANCE) {
-            BaseService._INSTANCE = this._MODEL;
-        }
-    }
-
-   static getInstance() {
-       if (null === BaseService._INSTANCE) {
-           return BaseService._INSTANCE = BaseService._INSTANCE;
-       }
+    constructor(@inject(TYPES.IDbContext) DbContext: IDbContext<BaseDomain>) {
+        super(DbContext);
+        console.log('============ BASE SERVICE ===============');
     }
 
     findAllAsync(): Promise<T> {
@@ -32,11 +25,8 @@ export class BaseService<T extends Typegoose> implements IBaseService<T> {
     }
     findOneAsync(){
         console.log('================ Base Service ============');
-        console.log(BaseService._INSTANCE);
-        console.log(this._MODEL);
-        // console.log(this._MODEL.modelName);
-        // return 'd';
-        return this._REPOSITORY.findOne();
+        this._BASEMODEL = this._MODEL;
+        return this.findOne();
     }
     findByIdAsync(id: string | bigint): Promise<T> {
         throw new Error('Method not implemented.');

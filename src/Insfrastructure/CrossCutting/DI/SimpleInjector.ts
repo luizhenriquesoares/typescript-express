@@ -1,4 +1,4 @@
-import { Container } from 'inversify';
+import { Container, ContainerModule } from 'inversify';
 import { BaseService } from '../../../Services/BaseService';
 import { BaseRepository } from '../../Repositories/BaseRepository';
 import { BaseDomain } from '../../../Domains/BaseDomain';
@@ -11,18 +11,36 @@ import { MongoDBContext } from '../../../Insfrastructure/MongoDBContext';
 import { TYPES } from './Types';
 import { Restaurant } from '../../../Domains/Restaurant/Restaurant';
 import { IRestaurante } from 'Domains/Restaurant/Interfaces/IRestaurante';
-const SimpleInjector = new Container();
+import { registerController } from './Utils';
 
-/* DbContext --------------------------------------------------------------- */
-SimpleInjector.bind<IDbContext<BaseDomain>>(TYPES.IDbContext).to(MongoDBContext);
+// Controllers
+import { RestaurantController } from '../../../Controllers/RestaurantController';
 
-/* BASE --------------------------------------------------------------- */
-SimpleInjector.bind<IBaseService<BaseDomain>>(TYPES.IBaseService).to(BaseService);
-SimpleInjector.bind<BaseDomain>(TYPES.BaseDomain).to(BaseDomain);
-SimpleInjector.bind<IBaseRepository<BaseDomain>>(TYPES.IBaseRepository).to(BaseRepository);
+const referenceDataIoCModule = new ContainerModule((bind) => {
 
-SimpleInjector.bind<IRestaurante>(TYPES.IRestaurante).to(Restaurant);
-/* Restaurants --------------------------------------------------------------- */
-SimpleInjector.bind<IRestauranteService<Restaurant>>(TYPES.IRestauranteService).to(RestaurantService);
+    // Controllers
+    // registerController(bind, RestaurantController);
 
-export { SimpleInjector };
+    /* Restaurants --------------------------------------------------------------- */
+    bind<IRestauranteService<Restaurant>>(TYPES.IRestauranteService)
+        .to(RestaurantService).inSingletonScope();
+
+    /* DbContext --------------------------------------------------------------- */
+    bind<IDbContext<BaseDomain>>(TYPES.IDbContext)
+        .to(MongoDBContext).inSingletonScope();
+
+    /* BASE --------------------------------------------------------------- */
+    bind<IBaseService<BaseDomain>>(TYPES.IBaseService)
+        .to(BaseService).inSingletonScope();
+
+    bind<BaseDomain>(TYPES.BaseDomain)
+        .to(BaseDomain).inSingletonScope();
+
+    bind<IBaseRepository<BaseDomain>>(TYPES.IBaseRepository)
+        .to(BaseRepository).inSingletonScope();
+
+    bind<IRestaurante>(TYPES.IRestaurante)
+        .to(Restaurant).inSingletonScope();
+});
+
+export { referenceDataIoCModule };

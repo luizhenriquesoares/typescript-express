@@ -6,6 +6,7 @@ import 'reflect-metadata';
 import { Restaurant } from '../Domains/Restaurant/Restaurant';
 import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
 import { BaseDomain } from '../Domains/BaseDomain';
+import { BaseRepository } from '../Insfrastructure/Repositories/BaseRepository';
 
 @injectable()
 export class RestaurantService extends BaseService<Restaurant> implements IRestauranteService<BaseDomain> {
@@ -17,6 +18,7 @@ export class RestaurantService extends BaseService<Restaurant> implements IResta
 
      public getRestaurante(){
         console.log('==============RESTAURANTE SERVICE ==============');
-        return this.findOneAsync();
+        return 'XAUBLAU';
+        // return this.findOneAsync();
     }
 }

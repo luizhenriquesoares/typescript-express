@@ -1,21 +1,24 @@
 
 import { Response, Request } from 'express';
-import { inject } from 'inversify';
-import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
-import IRestauranteService from '../Services/Interfaces/IRestauranteService';
-import { BaseController } from './BaseController';
+import { inject, injectable } from 'inversify';
 import { controller, httpGet } from 'inversify-express-utils';
+import { TYPES } from '../Insfrastructure/CrossCutting/DI/Types';
+import { BaseController } from './BaseController';
 import { Restaurant } from '../Domains/Restaurant/Restaurant';
-import { RestaurantDto } from 'Domains/Restaurant/RestaurantDto';
+import { RestaurantDto } from '../Domains/Restaurant/RestaurantDto';
+import IRestauranteService from '../Services/Interfaces/IRestauranteService';
+import { RestaurantService } from '../Insfrastructure/CrossCutting/DI/Decorators';
 
+// @injectable()
 @controller('/teste')
-export default class RestaurantController extends BaseController<Restaurant, RestaurantDto> {
+// extends BaseController<Restaurant, RestaurantDto>
+export class RestaurantController  {
 
-    private _RESTAURANTESERVICE: IRestauranteService<Restaurant>;
+    @RestaurantService protected _RESTAURANTESERVICE: IRestauranteService<Restaurant>;
 
-    constructor(@inject(TYPES.IRestauranteService) restauranteService: IRestauranteService<Restaurant> ) {
-        super();
-        this._RESTAURANTESERVICE = restauranteService;
+    constructor() {
+        // super();
+        // this._RESTAURANTESERVICE = restauranteService;
     }
     @httpGet('/')
    public checkTest(req: Request, res: Response) {

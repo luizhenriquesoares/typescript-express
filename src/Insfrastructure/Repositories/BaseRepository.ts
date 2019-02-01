@@ -4,12 +4,15 @@ import 'reflect-metadata';
 import { IBaseRepository } from './Interfaces/IBaseRepository';
 import { TYPES } from '../../Insfrastructure/CrossCutting/DI/Types';
 import { IDbContext } from './Interfaces/IDbContext';
+import { ModelType, Typegoose } from 'typegoose';
 @injectable()
 export class BaseRepository<TDomain extends BaseDomain> implements IBaseRepository<TDomain> {
 
     private readonly _DBCONTEXT: IDbContext<TDomain>;
+    protected _BASEMODEL: ModelType<any>;
 
     constructor(@inject(TYPES.IDbContext) DbContext: IDbContext<TDomain>) {
+        console.log('=================== CONSTRUCTOR BASE REPOSITORY=============================');
         this._DBCONTEXT = DbContext;
     }
 
@@ -18,6 +21,7 @@ export class BaseRepository<TDomain extends BaseDomain> implements IBaseReposito
     }
     findOne(){
         console.log('============== Base Repository FindONE ==============');
+        console.log('HERE', this._BASEMODEL);
         return this._DBCONTEXT.findOne();
     }
     create(item: TDomain): Promise<boolean> {

@@ -11,7 +11,7 @@ export class MongoDBContext<T extends Typegoose> implements IDbContext<BaseDomai
 
     protected _MONGODBCONTEXT;
     constructor() {
-        this._MONGODBCONTEXT = BaseService.getInstance();
+        console.log('================= CONSTRUCTOR MONGODBCONTEXT =================');
     }
 
     find(item: BaseDomain): Promise<BaseDomain[]> {
@@ -19,10 +19,9 @@ export class MongoDBContext<T extends Typegoose> implements IDbContext<BaseDomai
     }
     findOne() {
         console.log('============== MONGO DBContext ==============');
-        console.log(this._MONGODBCONTEXT);
-        const result = this._MONGODBCONTEXT.findOne().exec();
+        // const result = this._MONGODBCONTEXT.findOne().exec();
 
-        return result;
+        return 'DD';
     }
     create(item: BaseDomain): Promise<boolean> {
         throw new Error('Method not implemented.');

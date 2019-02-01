@@ -1,4 +1,5 @@
 const TYPES = {
+    App: Symbol.for('App'),
     IBaseRepository: Symbol.for('IBaseRepository'),
     IBaseService: Symbol.for('IBaseService'),
     IRestauranteService: Symbol.for('IRestauranteService'),
