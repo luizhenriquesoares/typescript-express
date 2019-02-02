@@ -1,9 +1,11 @@
 import { BaseDomain } from '../../../Domains/BaseDomain';
+import { ModelType } from 'typegoose';
 
-export interface IDbContext<T  extends BaseDomain>  {
-    find(item: T): Promise<T[]>;
+export interface IDbContext<T>  {
+    setContext(context: ModelType<T>): void ;
+    find(item: ModelType<T>): Promise<ModelType<T>[]>;
     findOne();
-    create(item: T): Promise<boolean>;
-    update(id: bigint, item: T): Promise<T>;
+    create(item: ModelType<T>): Promise<boolean>;
+    update(id: bigint, item: ModelType<T>): Promise<ModelType<T>>;
     delete(id: bigint): Promise<boolean>;
 }

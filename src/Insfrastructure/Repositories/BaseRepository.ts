@@ -5,29 +5,23 @@ import { IBaseRepository } from './Interfaces/IBaseRepository';
 import { TYPES } from '../../Insfrastructure/CrossCutting/DI/Types';
 import { IDbContext } from './Interfaces/IDbContext';
 import { ModelType, Typegoose } from 'typegoose';
+import { DbContext } from '../../Insfrastructure/CrossCutting/DI/Decorators';
+// implements IBaseRepository<any>
 @injectable()
-export class BaseRepository<TDomain extends BaseDomain> implements IBaseRepository<TDomain> {
+export class BaseRepository {
+    protected _CONTEXT: IDbContext<Typegoose>;
 
-    private readonly _DBCONTEXT: IDbContext<TDomain>;
-    protected _BASEMODEL: ModelType<any>;
-
-    constructor(@inject(TYPES.IDbContext) DbContext: IDbContext<TDomain>) {
-        console.log('=================== CONSTRUCTOR BASE REPOSITORY=============================');
-        this._DBCONTEXT = DbContext;
-    }
-
-    find(item: TDomain): Promise<TDomain[]> {
+    find(item: any): Promise<any[]> {
         throw new Error('Method not implemented.');
     }
     findOne(){
         console.log('============== Base Repository FindONE ==============');
-        console.log('HERE', this._BASEMODEL);
-        return this._DBCONTEXT.findOne();
+        return this._CONTEXT.findOne();
     }
-    create(item: TDomain): Promise<boolean> {
+    create(item: any): Promise<boolean> {
         throw new Error('Method not implemented.');
     }
-    update(id: bigint, item: TDomain): Promise<TDomain> {
+    update(id: bigint, item: any): Promise<any> {
         throw new Error('Method not implemented.');
     }
     delete(id: bigint): Promise<boolean> {

@@ -10,7 +10,7 @@ import { IDbContext } from '../../Repositories/Interfaces/IDbContext';
 import { MongoDBContext } from '../../../Insfrastructure/MongoDBContext';
 import { TYPES } from './Types';
 import { Restaurant } from '../../../Domains/Restaurant/Restaurant';
-import { IRestaurante } from 'Domains/Restaurant/Interfaces/IRestaurante';
+import { IRestaurant } from 'Domains/Restaurant/Interfaces/IRestaurant';
 import { registerController } from './Utils';
 
 // Controllers
@@ -25,6 +25,9 @@ const referenceDataIoCModule = new ContainerModule((bind) => {
     bind<IRestauranteService<Restaurant>>(TYPES.IRestauranteService)
         .to(RestaurantService).inSingletonScope();
 
+    bind<IRestaurant>(TYPES.IRestaurant)
+        .to(Restaurant).inSingletonScope();
+
     /* DbContext --------------------------------------------------------------- */
     bind<IDbContext<BaseDomain>>(TYPES.IDbContext)
         .to(MongoDBContext).inSingletonScope();
@@ -38,9 +41,6 @@ const referenceDataIoCModule = new ContainerModule((bind) => {
 
     bind<IBaseRepository<BaseDomain>>(TYPES.IBaseRepository)
         .to(BaseRepository).inSingletonScope();
-
-    bind<IRestaurante>(TYPES.IRestaurante)
-        .to(Restaurant).inSingletonScope();
 });
 
 export { referenceDataIoCModule };

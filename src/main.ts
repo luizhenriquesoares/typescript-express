@@ -1,6 +1,8 @@
 /* dependencies-------------------------------------------------------------- */
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
+import * as mongoose from 'mongoose';
+import * as bluebird from 'bluebird';
 
 import { referenceDataIoCModule } from './Insfrastructure/CrossCutting/DI/SimpleInjector';
 import { bootstrap } from './Insfrastructure/CrossCutting/Bootstrapping/Bootstrap';
@@ -32,14 +34,16 @@ export { runApp };
 
 // TODO IMPLEMENT CONNECT DATABASE
 
-// const connect = (): Promise<void> => {
-//     (mongoose as any).Promise = bluebird;
-//     return mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true }).then(
-//         () => {console.log('MongoDB Connection UP'); },
-//       ).catch(err => {
-//         console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
-//     });
-// };
+const connect = (): Promise<void> => {
+    (mongoose as any).Promise = bluebird;
+    return mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true }).then(
+        () => {console.log('MongoDB Connection UP'); },
+      ).catch(err => {
+        console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
+    });
+};
+
+connect();
 
 // // tslint:disable-next-line:no-shadowed-variable
 // const listen = (connect: any): void => {
